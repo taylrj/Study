@@ -9,8 +9,17 @@ taylorfang@twreporter.org
   - What is GraphQL ?
   - What is Relay ?
 - What problems do they solve ?
-- What's the core principle of Relay ?
+- What's the core principles of Relay ?
 
 ---
 
-![Flux Explained](https://facebook.github.io/flux/img/flux-simple-f8-diagram-explained-1300w.png)
+## What are they ? (1/)
+
+![Flux Explained](https://cdn-images-1.medium.com/max/1600/1*2mTYU2RCJHagQrqQokYpww.png)
+
+---
+
+## What are they ? (2/)
+
+- What is GraphQL ?
+  - GraphQL provides a **common** interface between client and server applications for fetching and manipulating data.
