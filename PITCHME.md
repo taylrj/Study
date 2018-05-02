@@ -1,7 +1,6 @@
-# Flux 
+# An Introduction to GraphQL and Relay
 
-An application architecture for React
-
+taylorfang@twreporter.org
 ---
 
 ### Flux Design
