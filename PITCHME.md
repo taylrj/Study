@@ -3,11 +3,13 @@
 taylorfang@twreporter.org
 ---
 
-### Flux Design
+### Outline
 
-- Dispatcher: Manages Data Flow
-- Stores: Handle State & Logic
-- Views: Render Data via React
+- What are they ?
+  - What is GraphQL ?
+  - What is Relay ?
+- What problems do they solve ?
+- What's the core principle of Relay ?
 
 ---
 
