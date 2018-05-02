@@ -3,7 +3,7 @@
 taylorfang@twreporter.org
 ---
 
-### Outline
+## Outline
 
 - What are they ?
   - What is GraphQL ?
