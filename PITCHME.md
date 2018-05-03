@@ -111,7 +111,7 @@ taylorfang@twreporter.org
   
 ---
 
-### What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (1/13)
 
 - Storage and caching
 - Object identification
@@ -119,7 +119,7 @@ taylorfang@twreporter.org
   
 ---
 
-### What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (2/13)
 
 - Storage and caching
   - Single client-side data store called **_Relay Store_**
@@ -130,7 +130,7 @@ taylorfang@twreporter.org
 
 ---
 
-### What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (3/13)
 
 - Object identification
   - unique identifiers
@@ -138,7 +138,7 @@ taylorfang@twreporter.org
 
 ---
 
-### What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (4/13)
 
 - The Connection Model
   - GraphQL connection
@@ -147,7 +147,7 @@ taylorfang@twreporter.org
 
 ---
 
-### What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (5/13)
 
 - The Connection Model
   - A connection is a way to get all of the nodes that are connected to another node in a specific way
@@ -155,13 +155,13 @@ taylorfang@twreporter.org
   
 ---
 
-### What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (6/13)
 
   ![Connection Explained](https://cdn-images-1.medium.com/max/800/1*G2Byvcku-CB0qz6Xmhp1RA.png)
   
 ---
 
-### What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (7/13)
 
   ```js
     {
@@ -183,7 +183,7 @@ taylorfang@twreporter.org
   
 ---
 
-### What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (8/13)
 
   - pagination models
     - offset/limit model
@@ -192,19 +192,19 @@ taylorfang@twreporter.org
   
 ---
 
-### What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (9/13)
 
   ![flaw Explained](https://cdn-images-1.medium.com/max/800/1*VGCj1SK3VCdWAleXK_rvkg.png)
   
 ---
 
-### What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (10/13)
 
   ![flaw Explained2](https://cdn-images-1.medium.com/max/800/1*xfqxO28vw5G1vVIDD8HihQ.png)
   
 ---
 
-### What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (11/13)
 
   ```js
   {
@@ -227,7 +227,7 @@ taylorfang@twreporter.org
   
 ---
 
-### What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (12/13)
 
   ```js
   {
@@ -252,7 +252,7 @@ taylorfang@twreporter.org
   
 ---
 
-### What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (13/13)
 
   ```js
   {
