@@ -255,22 +255,22 @@ taylorfang@twreporter.org
 ### What’s the core principles of Relay ? (13/13)
 
   ```js
-  {
-    movie(title: "Inception") {
-      releaseDate
-      actors(first: 2 after: "YXJyYXljb25uZWN0aW9uOjE=") {
-        edges {
-          cursor
-          node {
-            name
+      {
+        movie(title: "Inception") {
+          releaseDate
+          actors(first: 2 after: "YXJyYXljb25uZWN0aW9uOjE=") {
+            edges {
+              cursor
+              node {
+                name
+              }
+            }
+            pageInfo {
+              hasNextPage
+            }
           }
         }
-        pageInfo {
-          hasNextPage
-        }
       }
-    }
-  }
   ```
   
 ---
