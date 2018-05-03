@@ -1,3 +1,4 @@
+# 01  
 # An Introduction to GraphQL and Relay
 
 taylorfang@twreporter.org
@@ -8,7 +9,7 @@ taylorfang@twreporter.org
 - What are they ?
   - What is GraphQL ?
   - What is Relay ?
-- What problems do they solve ?
+- What problems does GraphQL solve ?
 - What's the core principles of Relay ?
 
 ---
@@ -66,6 +67,14 @@ taylorfang@twreporter.org
 ---
 
 ## What are they ? (8/8)
+
+- What is Relay ?
+  - Relay provides a way for React applications to declaratively specify data requirements instead of imperatively dictating instructions for how to fetch that data
+  - Declarative data requirements allow Relay to efficiently batch network requests
+
+---
+
+## What problems does GraphQL solve ? (8/8)
 
 - What is Relay ?
   - Relay provides a way for React applications to declaratively specify data requirements instead of imperatively dictating instructions for how to fetch that data
