@@ -151,16 +151,18 @@ taylorfang@twreporter.org
 
 - The Connection Model
   - A connection is a way to get all of the nodes that are connected to another node in a specific way
-  - For example:
-    ![Connection Explained](https://cdn-images-1.medium.com/max/800/1*G2Byvcku-CB0qz6Xmhp1RA.png)
+  - Example:
   
 ---
 
 ## What’s the core principles of Relay ? (/)
 
-- The Connection Model
-  - A connection is a way to get all of the nodes that are connected to another node in a specific way
-  - For example:
+![Connection Explained](https://cdn-images-1.medium.com/max/800/1*G2Byvcku-CB0qz6Xmhp1RA.png)
+  
+---
+
+## What’s the core principles of Relay ? (/)
+
   ```js
     {
       user(id: "ZW5jaG9kZSBIZWxsb1dvcmxk") {
