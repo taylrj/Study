@@ -157,7 +157,7 @@ taylorfang@twreporter.org
 
 ## What’s the core principles of Relay ? (/)
 
-![Connection Explained](https://cdn-images-1.medium.com/max/800/1*G2Byvcku-CB0qz6Xmhp1RA.png)
+  ![Connection Explained](https://cdn-images-1.medium.com/max/800/1*G2Byvcku-CB0qz6Xmhp1RA.png)
   
 ---
 
