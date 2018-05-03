@@ -1,10 +1,10 @@
 # CH 01  
-# An Introduction to GraphQL and Relay
+## An Introduction to GraphQL and Relay
 
 taylorfang@twreporter.org
 ---
 
-## Outline
+### Outline
 
 - What are they ?
   - What is GraphQL ?
@@ -14,20 +14,20 @@ taylorfang@twreporter.org
 
 ---
 
-## What are they ? (1/8)
+### What are they ? (1/8)
 
 ![GraphQL Explained](https://cdn-images-1.medium.com/max/1600/1*2mTYU2RCJHagQrqQokYpww.png)
 
 ---
 
-## What are they ? (2/8)
+### What are they ? (2/8)
 
 - What is GraphQL ?
   - GraphQL provides a **_common_** interface between client and server applications for fetching and manipulating data
 
 ---
 
-## What are they ? (3/8)
+### What are they ? (3/8)
 
 - What is GraphQL ?
   - GraphQL is a language
@@ -35,7 +35,7 @@ taylorfang@twreporter.org
 
 ---
 
-## What are they ? (4/8)
+### What are they ? (4/8)
 
 - What is GraphQL ?
   - GraphQL is a runtime
@@ -44,13 +44,13 @@ taylorfang@twreporter.org
 
 ---
 
-## What are they ? (5/8)
+### What are they ? (5/8)
 
 ![GraphQL Explained](https://cdn-images-1.medium.com/max/1600/1*2mTYU2RCJHagQrqQokYpww.png)
 
 ---
 
-## What are they ? (6/8)
+### What are they ? (6/8)
 
 - What is GraphQL ?
   - Schema
@@ -59,14 +59,14 @@ taylorfang@twreporter.org
 
 ---
 
-## What are they ? (7/8)
+### What are they ? (7/8)
 
 - What is Relay ?
   - Relay is a Javascript framework for building **data-driven** applications that uses GraphQL to enable React application to communicate their data requirements in a **_declarative way_**
 
 ---
 
-## What are they ? (8/8)
+### What are they ? (8/8)
 
 - What is Relay ?
   - Relay provides a way for React applications to declaratively specify data requirements instead of imperatively dictating instructions for how to fetch that data
@@ -74,7 +74,7 @@ taylorfang@twreporter.org
 
 ---
 
-## What problems does GraphQL solve ? (1/4)
+### What problems does GraphQL solve ? (1/4)
 
 - Multiple endpoints
   - solution:
@@ -83,7 +83,7 @@ taylorfang@twreporter.org
 
 ---
 
-## What problems does GraphQL solve ? (2/4)
+### What problems does GraphQL solve ? (2/4)
 
 - Versioning
   - solution:
@@ -92,7 +92,7 @@ taylorfang@twreporter.org
   
 ---
 
-## What problems does GraphQL solve ? (3/4)
+### What problems does GraphQL solve ? (3/4)
 
 - Over-fetching
   - solution:
@@ -101,7 +101,7 @@ taylorfang@twreporter.org
   
 ---
 
-## What problems does GraphQL solve ? (4/4)
+### What problems does GraphQL solve ? (4/4)
 
 - Clients dependency on servers
   - solution:
@@ -111,7 +111,7 @@ taylorfang@twreporter.org
   
 ---
 
-## What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (/)
 
 - Storage and caching
 - Object identification
@@ -119,7 +119,7 @@ taylorfang@twreporter.org
   
 ---
 
-## What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (/)
 
 - Storage and caching
   - Single client-side data store called **_Relay Store_**
@@ -130,7 +130,7 @@ taylorfang@twreporter.org
 
 ---
 
-## What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (/)
 
 - Object identification
   - unique identifiers
@@ -138,16 +138,16 @@ taylorfang@twreporter.org
 
 ---
 
-## What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (/)
 
 - The Connection Model
   - GraphQL connection
     - Introduced by **"Relay Cursor Connections Specification.”**
-    - cursor-based pagination method
+    - cursor-based pagination model
 
 ---
 
-## What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (/)
 
 - The Connection Model
   - A connection is a way to get all of the nodes that are connected to another node in a specific way
@@ -155,13 +155,13 @@ taylorfang@twreporter.org
   
 ---
 
-## What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (/)
 
   ![Connection Explained](https://cdn-images-1.medium.com/max/800/1*G2Byvcku-CB0qz6Xmhp1RA.png)
   
 ---
 
-## What’s the core principles of Relay ? (/)
+### What’s the core principles of Relay ? (/)
 
   ```js
     {
@@ -179,6 +179,98 @@ taylorfang@twreporter.org
         }
       }
     }
+  ```
+  
+---
+
+### What’s the core principles of Relay ? (/)
+
+  - pagination models
+    - offset/limit model
+    - after/first model
+    - The connection model
+  
+---
+
+### What’s the core principles of Relay ? (/)
+
+  ![flaw Explained](https://cdn-images-1.medium.com/max/800/1*VGCj1SK3VCdWAleXK_rvkg.png)
+  
+---
+
+### What’s the core principles of Relay ? (/)
+
+  ![flaw Explained2](https://cdn-images-1.medium.com/max/800/1*xfqxO28vw5G1vVIDD8HihQ.png)
+  
+---
+
+### What’s the core principles of Relay ? (/)
+
+  ```js
+  {
+    movie(title: "Inception") {
+      releaseDate
+      actors(first: 2 after: "opaqueCursor") {
+        edges {
+          cursor
+          node {
+            name
+          }
+        }
+        pageInfo {
+          hasNextPage
+        }
+      }
+    }
+  }
+  ```
+  
+---
+
+### What’s the core principles of Relay ? (/)
+
+  ```js
+  {
+    "releaseDate": "2010-08-29T12:00:00Z",
+    "actors": {
+      "edges": [
+        {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "node": {
+          "name": "Leonardo DiCaprio"
+        }
+      }, 
+      {
+        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+        "node": {
+          "name": "Ellen Page"
+        }
+      }]
+    }
+  }
+  ```
+  
+---
+
+### What’s the core principles of Relay ? (/)
+
+  ```js
+  {
+    movie(title: "Inception") {
+      releaseDate
+      actors(first: 2 after: "YXJyYXljb25uZWN0aW9uOjE=") {
+        edges {
+          cursor
+          node {
+            name
+          }
+        }
+        pageInfo {
+          hasNextPage
+        }
+      }
+    }
+  }
   ```
   
 ---
