@@ -62,7 +62,7 @@ taylorfang@twreporter.org
 ## What are they ? (7/8)
 
 - What is Relay ?
-  - Relay is a Javascript framework for building data-driven applications that uses GraphQL to enable React application to communicate their data requirements in a **_declarative way_**
+  - Relay is a Javascript framework for building **data-driven** applications that uses GraphQL to enable React application to communicate their data requirements in a **_declarative way_**
 
 ---
 
@@ -128,4 +128,55 @@ taylorfang@twreporter.org
     - rollbacks : remove the faulty object from the Queue Store
   - **_Cache layer_**, which can be any storage engine
 
+---
+
+## What’s the core principles of Relay ? (/)
+
+- Object identification
+  - unique identifiers
+  - Diffing algorithm: Only ask for the difference of the object between what we need and what we have
+
+---
+
+## What’s the core principles of Relay ? (/)
+
+- The Connection Model
+  - GraphQL connection
+    - Introduced by **"Relay Cursor Connections Specification.”**
+    - cursor-based pagination method
+
+---
+
+## What’s the core principles of Relay ? (/)
+
+- The Connection Model
+  - A connection is a way to get all of the nodes that are connected to another node in a specific way
+  - For example:
+    ![Connection Explained](https://cdn-images-1.medium.com/max/800/1*G2Byvcku-CB0qz6Xmhp1RA.png)
+  
+---
+
+## What’s the core principles of Relay ? (/)
+
+- The Connection Model
+  - A connection is a way to get all of the nodes that are connected to another node in a specific way
+  - For example:
+  ```js
+    {
+      user(id: "ZW5jaG9kZSBIZWxsb1dvcmxk") {
+        id
+        name
+        friendsConnection(first: 3) {
+          edges {
+            cursor
+            node {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  ```
+  
 ---
