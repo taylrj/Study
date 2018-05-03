@@ -108,7 +108,6 @@ taylorfang@twreporter.org
     - The runtime layer defines a generic graph-based schema
     - Client applications who speak GraphQL can query that schema within its capabilities
     - The runtime layer will do the communication with the two different data services
-    - This is how GraphQL first isolates the clients from needing to communicate in multiple languages
   
 ---
 
@@ -123,10 +122,10 @@ taylorfang@twreporter.org
 ## What’s the core principles of Relay ? (/)
 
 - Storage and caching
-  - Relay uses a single client-side data store called **_Relay Store_**
-  - In front of Relay Store : **_Queue Store_** manages the inflight changes to the data
+  - Single client-side data store called **_Relay Store_**
+  - **_Queue Store_** manages the inflight changes to the data
     - optimistic update
     - rollbacks : remove the faulty object from the Queue Store
-  - Behind of Relay Store : **_Cache layer_**, which can be any storage engine (e.g. localStorage)
+  - **_Cache layer_**, which can be any storage engine
 
 ---
