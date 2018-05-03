@@ -1,4 +1,4 @@
-# 01  
+# CH 01  
 # An Introduction to GraphQL and Relay
 
 taylorfang@twreporter.org
@@ -74,10 +74,27 @@ taylorfang@twreporter.org
 
 ---
 
-## What problems does GraphQL solve ? (8/8)
+## What problems does GraphQL solve ? (/)
 
-- What is Relay ?
-  - Relay provides a way for React applications to declaratively specify data requirements instead of imperatively dictating instructions for how to fetch that data
-  - Declarative data requirements allow Relay to efficiently batch network requests
+- The biggest problem with REST APIs is the nature of multiple endpoints. These require clients to do multiple round-trips to get their data
+  - -> Shift this multi-request complexity to the server-side and have the GraphQL layer ( runtime layer ) deal with it
+  - -> Fetch all the initial data required by a view with a single round-trip to the server
 
+---
+
+## What problems does GraphQL solve ? (/)
+
+- Versioning
+  - Especially important for mobile clients because we can’t control the version of the API they’re using. And we need think about backward compatible things
+  - -> Just add new fields without removing the old ones, because we have a graph and we can flexibly grow the graph by adding more nodes
+  - -> Leave paths on the graph for old APIs and introduce new ones without labeling them as new versions
+  
+---
+
+## What problems does GraphQL solve ? (/)
+
+- Over-fetching of information that’s not needed
+  - -> Having a client request language means that the clients will be in control
+  - -> They can ask for exactly what they need and the server will reply with exactly what that they’re asking for
+  
 ---
