@@ -74,7 +74,7 @@ taylorfang@twreporter.org
 
 ---
 
-## What problems does GraphQL solve ? (/)
+## What problems does GraphQL solve ? (1/4)
 
 - Multiple endpoints
   - solution:
@@ -83,20 +83,50 @@ taylorfang@twreporter.org
 
 ---
 
-## What problems does GraphQL solve ? (/)
+## What problems does GraphQL solve ? (2/4)
 
 - Versioning
   - solution:
-    - Just add new fields without removing the old ones, because we have a graph and we can flexibly grow the graph by adding more nodes
+    - Add new fields without removing the old ones, because we have a graph and we can flexibly grow the graph by adding more nodes
     - Leave paths on the graph for old APIs and introduce new ones without labeling them as new versions
   
 ---
 
-## What problems does GraphQL solve ? (/)
+## What problems does GraphQL solve ? (3/4)
 
 - Over-fetching
   - solution:
     - Having a client request language means that the clients will be in control
     - They can ask for exactly what they need and the server will reply with exactly what that they’re asking for
   
+---
+
+## What problems does GraphQL solve ? (4/4)
+
+- Clients dependency on servers
+  - solution:
+    - The runtime layer defines a generic graph-based schema
+    - Client applications who speak GraphQL can query that schema within its capabilities
+    - The runtime layer will do the communication with the two different data services
+    - This is how GraphQL first isolates the clients from needing to communicate in multiple languages
+  
+---
+
+## What’s the core principles of Relay ? (/)
+
+- Storage and caching
+- Object identification
+- The connection model
+  
+---
+
+## What’s the core principles of Relay ? (/)
+
+- Storage and caching
+  - Relay uses a single client-side data store called **_Relay Store_**
+  - In front of Relay Store : **_Queue Store_** manages the inflight changes to the data
+    - optimistic update
+    - rollbacks : remove the faulty object from the Queue Store
+  - Behind of Relay Store : **_Cache layer_**, which can be any storage engine (e.g. localStorage)
+
 ---
