@@ -1,5 +1,6 @@
-# CH 01  
+## CH 01  
 ## An Introduction to GraphQL and Relay
+
 
 taylorfang@twreporter.org
 ---
@@ -107,7 +108,7 @@ taylorfang@twreporter.org
   - solution:
     - The runtime layer defines a generic graph-based schema
     - Client applications who speak GraphQL can query that schema within its capabilities
-    - The runtime layer will do the communication with the two different data services
+    - The runtime layer will do the communication with different data services
   
 ---
 
@@ -210,7 +211,7 @@ taylorfang@twreporter.org
   {
     movie(title: "Inception") {
       releaseDate
-      actors(first: 2 after: "opaqueCursor") {
+      actors(first: 2) {
         edges {
           cursor
           node {
