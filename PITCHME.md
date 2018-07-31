@@ -33,57 +33,114 @@ Example: A query to read the list of comments on a blog article
 
 ---
 
-### What are they (2/8)
+### Queries - Syntax (Cont.)
 
-- What is GraphQL ?
-  - GraphQL provides a **_common_** interface between client and server applications for fetching and manipulating data
+- To execute the generic query, we supply a JSON object for the variables input like: 
 
----
-
-### What are they (3/8)
-
-- What is GraphQL ?
-  - GraphQL is a language
-    - The GraphQL query language is basically about selecting fields on objects
+```json
+{
+  "articleId" : 42
+}
+```
 
 ---
 
-### What are they (4/8)
+### Queries - Syntax (Cont.)
 
-- What is GraphQL ?
-  - GraphQL is a runtime
-    - To teach a data service to speak GraphQL, we need to implement a **_runtime layer _** and expose it to the clients who want to communicate with the service
-    - Think of this layer on the server side as simply a translator of the GraphQL language
+- This is a possible response:
 
----
-
-### What are they (5/8)
-
-![GraphQL Explained](https://cdn-images-1.medium.com/max/1600/1*2mTYU2RCJHagQrqQokYpww.png)
-
----
-
-### What are they (6/8)
-
-- What is GraphQL ?
-  - Schema
-    - Defines a GraphQL API's type system. It describes the complete set of possible data (objects, fields, relationships, everything) that a client can access
-    - A capabilities document that has a list of all the questions which the client can ask the GraphQL layer
-
----
-
-### What are they (7/8)
-
-- What is Relay ?
-  - Relay is a Javascript framework for building **data-driven** applications that uses GraphQL to enable React application to communicate their data requirements in a **_declarative way_**
+```graphql
+  {
+    "article":{
+      "comments": [
+        {
+          "commentId": 1,
+          "formattedBody": "GraphQL is <strong>cool</strong>",
+          "timestamp": "12/12/2015 - 12:12"
+        },
+        {
+          ...
+        }
+      ]
+    }
+  }
+```
 
 ---
 
-### What are they (8/8)
+### Queries - Directives
 
-- What is Relay ?
-  - Relay provides a way for React applications to declaratively specify data requirements instead of imperatively dictating instructions for how to fetch that data
-  - Declarative data requirements allow Relay to efficiently batch network requests
+We can provide options to alter the GraphQL runtime execution using directives.
+
+characteristics of directives:
+- unique name
+- list of arguments
+- list of locations where the use of directive is accepted
+  - operation
+  - fragment
+  - field
+
+---
+
+### Queries - Directives (cont.)
+
+We can provide options to alter the GraphQL runtime execution using directives.
+- `@include`, which directs the GraphQL executor to include a field or a fragment only when the `if` argument is true
+- `@skip`
+
+```graphql
+query Hero($episode: Episode, $withFriends: Boolean!) {
+  hero(episode: $episode) {
+    name
+    friends @include(if: $withFriends) {
+      name
+    }
+  }
+}
+```
+
+---
+
+### Queries - Directives (cont.)
+
+- Aliases
+
+```graphql
+query ArticleResponses {
+  post: Articles(articleId: 47) {
+    responseId: commentId
+  }
+}
+```
+
+---
+
+### Queries - Fragments
+
+- Using the spread operator
+
+```graphql
+query TwoArticles {
+  firstArticle: article(articleId: 42) {
+    ...CommentList
+  }
+  secondArticle: article(articleId: 43) {
+    ...CommentList
+  }
+}
+
+fragment CommentList on Article {
+  comments {
+    commentId
+    formattedBody
+    timestamp
+  }
+}
+```
+---
+
+### Mutations
+
 
 ---
 
