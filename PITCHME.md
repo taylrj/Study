@@ -1,5 +1,5 @@
-## CH 01  
-## An Introduction to GraphQL and Relay
+## CH 02  
+## GraphQL: Queries and Mutations
 
 
 taylorfang@twreporter.org
@@ -7,17 +7,29 @@ taylorfang@twreporter.org
 
 ### Outline
 
-- What are they ?
-  - What is GraphQL ?
-  - What is Relay ?
-- What problems does GraphQL solve ?
-- What's the core principles of Relay ?
+- Queries
+  - Syntax
+  - Directives
+  - Fragments
+- Mutations
 
 ---
 
-### What are they (1/8)
+### Queries - Syntax
 
-![GraphQL Explained](https://cdn-images-1.medium.com/max/1600/1*2mTYU2RCJHagQrqQokYpww.png)
+Example: A query to read the list of comments on a blog article
+
+```grapghql
+  query ArticleComments($articleId: Int!) {
+    article(articleId: $articleId){
+      comments {
+        commentId
+        formattedBody
+        timestamp
+      }
+    }
+  }
+```
 
 ---
 
