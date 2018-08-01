@@ -11,10 +11,10 @@ taylorfang@twreporter.org
 - Type System and Type language
   - Types
     - Scalar and Object types
-    - Interfaces and Unions
     - Enumeration types
     - Type modifiers
-- Introspective API
+    - Interfaces and Unions
+- Introspection
 - // resolve function
 - // validation
 - // versioning
@@ -85,12 +85,9 @@ taylorfang@twreporter.org
 
 ---
 
-### Type System and Type language: Types
+### Type System and Type language: Object types
   
-- **_object types_** : The most basic components of a GraphQL schema represents a kind of object you can fetch from your service
-- **_scalars types_** : a scalar value that cannot have fields of its own
-  - GraphQLInt, GraphQLFloat, GraphQLString, GraphQLBoolean, GraphQLID
-
+- **_Object Types_** : The most basic components of a GraphQL schema represents a kind of object you can fetch from your service
 ```js
 const SimpleType = new GraphQLObjectType({
   name: 'simpleName',
@@ -103,134 +100,246 @@ const SimpleType = new GraphQLObjectType({
 
 ---
 
-### Type System and Type language: Types (cont.)
+### Type System and Type language: Scalar Types
 
-- **_scalars types_** : a scalar value that cannot have fields of its own
+- **_Scalar Types_** : a scalar value that cannot have fields of its own
   - GraphQLInt, GraphQLFloat, GraphQLString, GraphQLBoolean, GraphQLID
+
 ---
 
-### What’s the core principles of Relay (5/13)
+### Type System and Type language: Enums Types
 
-- The Connection Model
-  - A connection is a way to get all of the nodes that are connected to another node in a specific way
-  - Example:
+- **_Enums Types_** : when a scalar value to represent for a field has a list of possible values in a set, and it can only be one of them
+
+```js
+const ContractType = new GraphQLEnumType({
+  name: 'Contract',
+  values: {
+    FULLTIME: { value: 1 },
+    PARTTIME: { value: 2 },
+    SHIFTWORK: { value: 3 }
+  }
+})
+```
+
+---
+
+### Type System and Type language: Type Modifiers
+
+- **_Type Modifiers_**
+  - GraphQLList: represents a list of those type it wraps
+  - GraphQLNonNull: enforces the value it wraps is never null
+
+```js
+const DepartmentType = new GraphQLObjectType({
+  name: 'department',
+  fields: {
+    name: { type: new GraphQLNonNull(GraphQLString) },
+    contractTypes: new GraphQLList(ContractType)
+  }
+})
+```
   
 ---
 
-### What’s the core principles of Relay (6/13)
+### Type System and Type language: Interfaces
 
-  ![Connection Explained](https://cdn-images-1.medium.com/max/800/1*G2Byvcku-CB0qz6Xmhp1RA.png)
+- **_Interfaces_**: An abstract type that includes a certain set of fields a type must include to implement the interface
+
+```js
+const TypeA = new GraphQLObjectType({
+  name: 'A',
+  fields: {
+    name: { type: new GraphQLString },
+    otherTypes: { type: new GraphQLString }
+  }
+})
+const TypeB = new GraphQLObjectType({
+  name: 'B',
+  fields: {
+    name: { type: new GraphQLString },
+    someOtherTypes: { type: new GraphQLString }
+  }
+})
+```
   
 ---
 
-### What’s the core principles of Relay (7/13)
+### Type System and Type language: Interfaces (cont.)
 
-  ```js
-    {
-      user(id: "ZW5jaG9kZSBIZWxsb1dvcmxk") {
-        id
+```js
+const CommonType = new GraphQLInterfaceType({
+  name: 'Common',
+  fields: {
+    name: { type: GraphQLString }
+  }
+})
+const TypeC = new GraphQLObjectType({
+  name: 'C',
+  fields: {
+    name: { type: new GraphQLString },
+    someTypes: { type: new GraphQLString }
+  },
+  interfaces: [ CommonType ]
+})
+```
+  
+---
+
+### Type System and Type language: Unions
+
+```js
+const EducationType = new GraphQLObjectType({
+  name: 'Education'
+  fields: () => ({
+    schoolName: { type: GraphQLString }
+  })
+})
+const ExperienceType = new GraphQLObjectType({
+  name: 'Experience'
+  fields: () => ({
+    companyName: { type: GraphQLString }
+  })
+})
+const ResumeType = new GraphQLUnionType({
+  name: 'Resume',
+  types: [ExperienceType, EducationType],
+  resolveType(value) {
+    if (value instanceof Experience) {
+      return ExperienceType
+    }
+    if (value instanceof Education) {
+      return EducationType
+    }
+  }
+})
+```
+  
+---
+
+### Type System and Type language: Unions
+
+```graphql
+query ResumeInformation {
+  Resume {
+    ... on Education {
+      schoolName
+    }
+    ... on Experience {
+      companiName
+    }
+  }
+}
+```
+  
+---
+
+### Introspection
+
+- Use **_introspective API_** to ask about the GraphQL schema, all of the types and what directives that schema supports.
+
+```js
+const queryType = new GraphQLObjectType({
+  name: 'RootQuery',
+  fields: {
+    hello: {
+      type: GraphQLString
+    },
+    helloTimes: {
+      description: 'Just to **Say Hello**',
+      type: new GraphQLList(GraphQLInt),
+      args: {
+        count: {
+          type: GraphQLInt,
+          defaultValue: 2
+        }
+      }
+    }
+  }
+})
+```
+
+---
+
+### Introspection (cont.)
+
+```graphql
+query TypeFields {
+  _type(name: "RootQuery") {
+    fields {
+      name
+      description
+      args {
         name
-        friendsConnection(first: 3) {
-          edges {
-            cursor
-            node {
-              id
-              name
-            }
-          }
-        }
-      }
-    }
-  ```
-  
----
-
-### What’s the core principles of Relay (8/13)
-
-  - pagination models
-    - offset/limit model
-    - after/first model
-    - The connection model
-  
----
-
-### What’s the core principles of Relay (9/13)
-
-  ![flaw Explained](https://cdn-images-1.medium.com/max/800/1*VGCj1SK3VCdWAleXK_rvkg.png)
-  
----
-
-### What’s the core principles of Relay (10/13)
-
-  ![flaw Explained2](https://cdn-images-1.medium.com/max/800/1*xfqxO28vw5G1vVIDD8HihQ.png)
-  
----
-
-### What’s the core principles of Relay (11/13)
-
-  ```js
-  {
-    movie(title: "Inception") {
-      releaseDate
-      actors(first: 2) {
-        edges {
-          cursor
-          node {
-            name
-          }
-        }
-        pageInfo {
-          hasNextPage
-        }
       }
     }
   }
-  ```
-  
+}
+```
+
 ---
 
-### What’s the core principles of Relay (12/13)
+### Introspection (cont.)
 
-  ```js
-  {
-    "releaseDate": "2010-08-29T12:00:00Z",
-    "actors": {
-      "edges": [
+```json
+{
+  "data": {
+    "__type": {
+      "fields": [
         {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
-        "node": {
-          "name": "Leonardo DiCaprio"
+          "name": "hello",
+          "description": null,
+          "args": []
+        },
+        {
+          "name": "helloTimes",
+          "description": "Just to **Say Hello**",
+          "arg": [
+            {
+              "name": "count"
+            }
+          ] 
         }
-      }, 
-      {
-        "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
-        "node": {
-          "name": "Ellen Page"
-        }
-      }]
+      ]
     }
   }
-  ```
-  
+}
+```
+
 ---
 
-### What’s the core principles of Relay (13/13)
+### Introspection (cont.)
 
-  ```js
-  {
-    movie(title: "Inception") {
-      releaseDate
-      actors(first: 2 after: "YXJyYXljb25uZWN0aW9uOjE=") {
-        edges {
-          cursor
-          node {
-            name
-          }
-        }
-        pageInfo {
-          hasNextPage
-        }
+```graphql
+query QueryTypeName {
+  __schema {
+    queryType {
+      name
+    }
+  }
+}
+```
+
+---
+
+### Introspection (cont.)
+
+```json
+{
+  "data": {
+    "__schema": {
+      "queryType": {
+        "name": "RootQuery"
       }
     }
   }
-  ```
+}
+```
+
+---
+
+### Introspection (cont.)
+
+**___Schema_**, **___Type_**, **___TypeKind_**, **___Field_**, **___InputValue_**, **___EnumValue_**, **___Directive_** - These all are preceded with a double underscore, indicating that they are part of the introspection system.
+
+---
