@@ -9,11 +9,11 @@ taylorfang@twreporter.org
 
 - The schema object
 - Type System and Type language
-- Types
-  - Scalar and Object types
-  - Interfaces and Unions
-  - Enumeration types
-  - Type modifiers
+  - Types
+    - Scalar and Object types
+    - Interfaces and Unions
+    - Enumeration types
+    - Type modifiers
 - Introspective API
 - // resolve function
 - // validation
@@ -25,52 +25,76 @@ taylorfang@twreporter.org
 
 - A GraphQL schema is what we write to represent the capabilities of a GraphQL server.
 - The schema defines the types and directives we want the server to support.
+  - what data we can ask for
+  - what fields can we select
+  - What kinds of objects might they return
+  - What fields are available on those sub-objects
   
 ---
 
-### What problems does GraphQL solve (4/4)
+### The schema object (cont.)
 
-- Clients dependency on servers
-  - solution:
-    - The runtime layer defines a generic graph-based schema
-    - Client applications who speak GraphQL can query that schema within its capabilities
-    - The runtime layer will do the communication with different data services
+- The constructor of the `GraphQLSchema` class expects a configuration object
+
+```js
+  class GraphQLSchema {
+    constructor(config: GraphQLSchemaConfig)
+  }
+
+  type GraphQLSchemaConfig = {
+    // query: A read-only fetch of information
+    query: GraphQLObjectType;
+    // mutation: A write followed by a read fetch of information 
+    mutation?: ?GraphQLObjectType; 
+  }
+```
+
+---
+
+### The schema object (cont.)
+
+- The schema is a representation of the capabilities of a GraphQL server starting from the root fields
+- Define multiple schemas by creating new instances of **_GraphQLSchema_** class
+
+```js
+  const queryType = new GraphQLObjectType({
+    name: 'RootQuery',
+    fields: {
+      hello: {
+        // ...
+      },
+      diceRoll: {
+        // ...
+      },
+      usersCount: {
+        // ...
+      }
+    }
+  })
+  const mySchema = new GraphQLSchema({
+    query: queryType
+  });
+```
   
 ---
 
-### What’s the core principles of Relay (1/13)
+### Type System and Type language
 
-- Storage and caching
-- Object identification
-- The connection model
-  
----
-
-### What’s the core principles of Relay (2/13)
-
-- Storage and caching
-  - Single client-side data store called **_Relay Store_**
-  - **_Queue Store_** manages the inflight changes to the data
-    - optimistic update
-    - rollbacks : remove the faulty object from the Queue Store
-  - **_Cache layer_**, which can be any storage engine
+- GraphQL schemas in a language-agnostic way: **_GraphQL schema language_**
+  - GraphQL is a strongly-typed language
+  - A GraphQL schema should have types for all objects that it uses
 
 ---
 
-### What’s the core principles of Relay (3/13)
+### Type System and Type language: Types
 
-- Object identification
-  - unique identifiers
-  - Diffing algorithm: Only ask for the difference of the object between what we need and what we have
+- The most basic components of a GraphQL schema are **_object types_**, which just represent a kind of object you can fetch from your service
 
 ---
 
-### What’s the core principles of Relay (4/13)
+### Type System and Type language: Types (cont.)
 
-- The Connection Model
-  - GraphQL connection
-    - Introduced by **"Relay Cursor Connections Specification.”**
-    - cursor-based pagination model
+- 
 
 ---
 
