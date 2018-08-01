@@ -15,16 +15,16 @@ taylorfang@twreporter.org
     - Type modifiers
     - Interfaces and Unions
 - Introspection
-- // resolve function
-- // validation
-- // versioning
+- Validation
+- // Execution
+- Versioning
 
 ---
 
 ### The schema object
 
-- A GraphQL schema is what we write to represent the capabilities of a GraphQL server.
-- The schema defines the types and directives we want the server to support.
+- A GraphQL schema is what we write to represent the capabilities of a GraphQL server
+- The schema defines the types and directives we want the server to support
   - what data we can ask for
   - what fields can we select
   - What kinds of objects might they return
@@ -236,7 +236,7 @@ query ResumeInformation {
 
 ### Introspection
 
-- Use **_introspective API_** to ask about the GraphQL schema, all of the types and what directives that schema supports.
+- Use **_introspective API_** to ask about the GraphQL schema, all of the types and what directives that schema supports
 
 ```js
 const queryType = new GraphQLObjectType({
@@ -340,6 +340,46 @@ query QueryTypeName {
 
 ### Introspection (cont.)
 
-**___Schema_**, **___Type_**, **___TypeKind_**, **___Field_**, **___InputValue_**, **___EnumValue_**, **___Directive_** - These all are preceded with a double underscore, indicating that they are part of the introspection system.
+**___schema_**, **___type_**, **___typeKind_**, **___field_**, **___inputValue_**, **___enumValue_**, **___directive_** - These all are preceded with a double underscore, indicating that they are part of the introspection system
 
 ---
+
+### Validation
+
+- The GraphQL executor will only excute requests that pass all validation rules
+- If there are any errors during the validation phase, a list of errors would be returned instead of any response
+- For example: if a field excepts a numeric argument and we send it a string instead
+
+---
+
+### Versioning
+
+- Use new fields and keep the old fields
+- If we want to stop supporting old fields in a schema: deprecate a GraphQL field by adding a `deprecationReason` property in it
+- Example: we have a `name` field
+  - previous: Boolean argument
+  - now: enum argument
+
+---
+
+### Versioning (cont.)
+
+- Tools that work with introspective queries will know
+
+```js
+const EmployeeType = new GraphQLObjectType({
+  name: 'Employee',
+  fields: () => ({
+    name: {
+      type: GraphQLString,
+      deprecationReason: 'Use nameFor instead',
+      args: {
+        upperCase: { type: GraphQLBoolean }
+      }
+    },
+    nameForCase: {
+      // ..
+    }
+  })
+})
+```
