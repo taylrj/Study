@@ -70,9 +70,7 @@ Example: A query to read the list of comments on a blog article
 
 ### Queries - Directives
 
-- We can provide options to alter the GraphQL runtime execution using directives.
-
--characteristics of directives:
+- characteristics of directives:
   - unique name
   - list of arguments
   - list of locations where the use of directive is accepted
