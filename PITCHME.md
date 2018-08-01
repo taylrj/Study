@@ -54,7 +54,6 @@ taylorfang@twreporter.org
 ### The schema object (cont.)
 
 - The schema is a representation of the capabilities of a GraphQL server starting from the root fields
-- Define multiple schemas by creating new instances of **_GraphQLSchema_** class
 
 ```js
   const queryType = new GraphQLObjectType({
@@ -87,15 +86,27 @@ taylorfang@twreporter.org
 ---
 
 ### Type System and Type language: Types
+  
+- **_object types_** : The most basic components of a GraphQL schema represents a kind of object you can fetch from your service
+- **_scalars types_** : a scalar value that cannot have fields of its own
+  - GraphQLInt, GraphQLFloat, GraphQLString, GraphQLBoolean, GraphQLID
 
-- The most basic components of a GraphQL schema are **_object types_**, which just represent a kind of object you can fetch from your service
+```js
+const SimpleType = new GraphQLObjectType({
+  name: 'simpleName',
+  fields: {
+    person: PersonType,
+    phoneNumber: { type: GraphQLString }
+  }
+})
+```
 
 ---
 
 ### Type System and Type language: Types (cont.)
 
-- 
-
+- **_scalars types_** : a scalar value that cannot have fields of its own
+  - GraphQLInt, GraphQLFloat, GraphQLString, GraphQLBoolean, GraphQLID
 ---
 
 ### What’s the core principles of Relay (5/13)
